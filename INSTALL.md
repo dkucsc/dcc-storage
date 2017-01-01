@@ -19,13 +19,13 @@ Each component is a Spring Boot java application packaged in a JAR. Look in src/
 This guide describes setting up the ICGC Storage System on a single Ubuntu EC2 instance.
 
 Before getting started:
-- Ensure you have access to the dcc-auth, dcc-metadata, and dcc-storage source
-- Make an S3 bucket to hold the storage system data
-- Make a KMS Master Key to encrypt data stored in S3 using the web console (http://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
-- Make an IAM role with permission to write to s3 (AmazonS3FullAccess).
-- Launch an Ubuntu EC2 with the newly created IAM role and a static IP.
-- Open ports 8444 and 5431 of the EC2 for anybody who will use the storage system as a client and open port 8443 to anybody who will generate access tokens to be given to end users.
-  - Also, open ports 8443, 8444, 5431, and 27017 of the EC2 to the ip of the EC2 to ensure the servers can communicate with each other.
+- Ensure you have access to the dcc-metadata and dcc-storage source code repositories.
+- Make an S3 bucket to hold the storage system data.
+- Make a KMS Master Key to encrypt data stored in S3; do this via the web console (http://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
+- Make an IAM role with permission to write to S3 (AmazonS3FullAccess).
+- Launch an Ubuntu EC2 with the newly created IAM role and a static IP.  You might be able to accomplish this via AWS Elastic IPs.
+- Open ports 8444 and 5431 of the EC2 for anybody who will use the storage system as a client, and open port 8443 to anybody who will generate access tokens to be given to end users.  [I think this means making sure that before you actually Launch the EC2, you assign it a security group which has these ports open.]
+  - Also, open ports 8443, 8444, 5431, and 27017 of the EC2 to the IP of the EC2 to ensure the servers can communicate with each other.
 - Get a domain and point it towards the new EC2's IP address. The command shown in this guide use the domain storage.ucsc-cgl.org; this should be replaced with the desired domain.
 
 Then do the following on the EC2:
